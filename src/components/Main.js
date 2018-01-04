@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import CurrentWeather from './CurrentWeather';
+import { fetchWeather } from '../actions/WeatherActions';
 
 class Main extends Component {
   state = {
@@ -11,10 +13,9 @@ class Main extends Component {
 
   componentWillMount() {
     this.watchId = navigator.geolocation.getCurrentPosition((position) => {
-      this.setState({ 
-        latitude: position.coords.latitude, 
-        longitude: position.coords.longitude });
-      },
+      const { latitude, longitude } = position.coords;
+      this.props.fetchWeather({ latitude, longitude });
+    },
       (error) => this.setState({ error: error.message || '' }),
       { enableHighAccuracy: true, timeout: 20000, maximumage: 1000 }
     );
@@ -26,11 +27,9 @@ class Main extends Component {
 
   render() {
     return (
-      <View style={{ paddingTop: 65 }}>
-        <Text>Latitude: {this.state.latitude}, Longitude: {this.state.longitude}</Text>
-      </View>
+      <CurrentWeather />
     );
   }
 }
 
-export default connect()(Main);
+export default connect(null, { fetchWeather })(Main);
