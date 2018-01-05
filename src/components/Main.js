@@ -3,11 +3,10 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import CurrentWeather from './CurrentWeather';
 import { fetchWeather } from '../actions/WeatherActions';
+import { fetchLocation } from '../actions/GeolocationActions';
 
 class Main extends Component {
   state = {
-    latitude: '',
-    longitude: '',
     error: ''
   }
 
@@ -15,6 +14,7 @@ class Main extends Component {
     this.watchId = navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       this.props.fetchWeather({ latitude, longitude });
+      this.props.fetchLocation({ latitude, longitude });
     },
       (error) => this.setState({ error: error.message || '' }),
       { enableHighAccuracy: true, timeout: 20000, maximumage: 1000 }
@@ -32,4 +32,4 @@ class Main extends Component {
   }
 }
 
-export default connect(null, { fetchWeather })(Main);
+export default connect(null, { fetchWeather, fetchLocation })(Main);

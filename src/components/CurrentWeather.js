@@ -14,21 +14,23 @@ class CurrentWeather extends Component {
       weatherTextStyle 
     } = styles;
 
+    const { address, temperature, summary } = this.props;
+
     return (
       <View>
         <View style={[containerStyle, locationContainerStyle]}>
           <Text style={locationTextStyle}>
-            Vancouver
+            {address}
           </Text>
         </View>
         <View style={[containerStyle, degreesContainerStyle]}>
           <Text style={degreesTextStyle}>
-            {this.props.temperature} °C
+            {temperature} °C
           </Text>
         </View>
         <View style={[containerStyle, weatherContainerStyle]}>
           <Text style={weatherTextStyle}>
-            {this.props.summary}
+            {summary}
           </Text>
         </View>
       </View>
@@ -68,9 +70,12 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { temperature, summary } = state.weather;
+  const { temperature, summary } = state.weather.currently;
+  const roundedTemp = Math.round(temperature);
 
-  return { temperature, summary };
+  const { address } = state.geolocation;
+  
+  return { temperature: roundedTemp, summary, address };
 };
 
 export default connect(mapStateToProps, null)(CurrentWeather);
