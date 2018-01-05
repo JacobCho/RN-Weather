@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import CurrentWeather from './CurrentWeather';
+import ForecastList from './ForecastList';
 import { fetchWeather } from '../actions/WeatherActions';
 import { fetchLocation } from '../actions/GeolocationActions';
 
@@ -27,7 +28,10 @@ class Main extends Component {
 
   render() {
     return (
-      <CurrentWeather />
+      <View>
+        <CurrentWeather />
+        <ForecastList style={{flex: 1, backgroundColor: 'red'}}/>
+      </View>
     );
   }
 }

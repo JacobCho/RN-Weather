@@ -70,12 +70,10 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { temperature, summary } = state.weather.currently;
-  const roundedTemp = Math.round(temperature);
-
+  const { temperature, summary, icon } = state.weather.currently;
   const { address } = state.geolocation;
   
-  return { temperature: roundedTemp, summary, address };
+  return { temperature, summary, address };
 };
 
 export default connect(mapStateToProps, null)(CurrentWeather);
