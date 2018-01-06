@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
+import { getIconSource } from '../helpers/iconHelper';
 
 class ListItem extends Component {
   getDayOfWeek() {
@@ -12,15 +13,17 @@ class ListItem extends Component {
   }
 
   render() {
-    const { summary, temperatureMin, temperatureMax } = this.props.weather;
-    const { containerStyle, dayTextStyle, temperatureContainerStyle } = styles;
+    const { summary, temperatureMin, temperatureMax, icon } = this.props.weather;
+    const { containerStyle, dayTextStyle, iconStyle, temperatureContainerStyle } = styles;
+    const iconSource = getIconSource(icon);
 
     return (
       <View style={containerStyle}>
         <Text style={dayTextStyle}>{this.getDayOfWeek()}</Text>
+        <Image source={iconSource} style={iconStyle}/>
         <View style={temperatureContainerStyle}>
-          <Text>{Math.round(temperatureMin)}°C</Text>
-          <Text>{Math.round(temperatureMax)}°C</Text>
+          <Text>{Math.round(temperatureMin)} °C</Text>
+          <Text>{Math.round(temperatureMax)} °C</Text>
         </View>
       </View>
     );
@@ -33,6 +36,10 @@ const styles = {
     flexDirection: 'row',
     flex: 1,
     justifyContent: 'space-between'
+  },
+  iconStyle: {
+    height: 30,
+    width: 30,
   },
   dayTextStyle: {
     paddingLeft: 15,
