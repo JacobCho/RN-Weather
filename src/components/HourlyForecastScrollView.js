@@ -36,9 +36,8 @@ const styles = {
 
 const mapStateToProps = (state) => {
   const { data } = state.weather.hourly;
-  var hourly = data.splice(0, 12);
 
-  return { data: hourly };
+  return { data };
 };
 
 export default connect(mapStateToProps, null)(HourlyForecastScrollView);
