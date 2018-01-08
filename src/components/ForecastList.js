@@ -25,9 +25,10 @@ class ForecastList extends Component {
   }
 
   render() {
-    const { summaryTextStyle, listViewStyle } = styles; 
+    const { summaryTextStyle, forecastHeaderStyle, listViewStyle } = styles; 
     return (
       <View>
+        <Text style={forecastHeaderStyle}>Weekly Forecast</Text>
         <Text style={summaryTextStyle}>{this.props.summary}</Text>
         <ListView 
           style={listViewStyle}
@@ -45,8 +46,14 @@ const styles = {
   summaryTextStyle: {
     paddingLeft: 15,
     paddingRight: 15,
-    paddingTop: 20,
     paddingBottom: 20
+  },
+  forecastHeaderStyle: {
+    paddingLeft: 15,
+    paddingRight: 15, 
+    paddingBottom: 15,
+    paddingTop: 20,
+    fontWeight: 'bold'
   },
   listViewStyle: {
   }
