@@ -28,9 +28,9 @@ class Main extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <CurrentWeather />
-        <ForecastList style={{flex: 1, backgroundColor: 'red'}}/>
+        <ForecastList />
       </View>
     );
   }

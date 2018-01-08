@@ -54,8 +54,10 @@ const styles = {
 
 const mapStateToProps = (state) => {
   const { data, summary } = state.weather.daily;
-  
-  return { forecast: data, summary };
+  var forecast = data;
+  forecast.shift();
+
+  return { forecast, summary };
 };
 
 export default connect(mapStateToProps, null)(ForecastList);

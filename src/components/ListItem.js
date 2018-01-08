@@ -16,7 +16,7 @@ class ListItem extends Component {
     const { summary, temperatureMin, temperatureMax, icon } = this.props.weather;
     const { containerStyle, dayTextStyle, iconStyle, temperatureContainerStyle } = styles;
     const iconSource = getIconSource(icon);
-
+    
     return (
       <View style={containerStyle}>
         <Text style={dayTextStyle}>{this.getDayOfWeek()}</Text>

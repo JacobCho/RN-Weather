@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { connect } from 'react-redux';
+import { getIconSource } from '../helpers/iconHelper';
 
 class CurrentWeather extends Component {
   render() {
@@ -11,11 +12,13 @@ class CurrentWeather extends Component {
       degreesContainerStyle,
       degreesTextStyle, 
       weatherContainerStyle,
-      weatherTextStyle 
+      weatherTextStyle,
+      iconStyle
     } = styles;
 
-    const { address, temperature, summary } = this.props;
-
+    const { address, temperature, summary, icon } = this.props;
+    const iconSource = getIconSource(icon);
+    
     return (
       <View>
         <View style={[containerStyle, locationContainerStyle]}>
@@ -29,6 +32,7 @@ class CurrentWeather extends Component {
           </Text>
         </View>
         <View style={[containerStyle, weatherContainerStyle]}>
+          <Image source={iconSource} style={iconStyle} />
           <Text style={weatherTextStyle}>
             {summary}
           </Text>
@@ -64,8 +68,13 @@ const styles = {
   },
   weatherTextStyle: {
     fontSize: 18,
-    flex: 1,
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingLeft: 10
+  },
+  iconStyle: {
+    width: 30,
+    height: 30,
+    justifyContent: 'flex-end',
   }
 };
 
@@ -73,7 +82,7 @@ const mapStateToProps = (state) => {
   const { temperature, summary, icon } = state.weather.currently;
   const { address } = state.geolocation;
   
-  return { temperature, summary, address };
+  return { temperature, summary, icon, address,  };
 };
 
 export default connect(mapStateToProps, null)(CurrentWeather);
