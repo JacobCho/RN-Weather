@@ -82,7 +82,7 @@ const mapStateToProps = (state) => {
   const { temperature, summary, icon } = state.weather.currently;
   const { address } = state.geolocation;
   
-  return { temperature, summary, icon, address,  };
+  return { temperature, summary, icon, address };
 };
 
 export default connect(mapStateToProps, null)(CurrentWeather);

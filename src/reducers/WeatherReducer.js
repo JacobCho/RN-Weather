@@ -8,6 +8,9 @@ const INITIAL_STATE = {
     summary: '',
     icon: ''
   },
+  hourly: {
+    data: []
+  },
   daily: {
     summary: '',
     data: []
@@ -25,6 +28,7 @@ export default (state = INITIAL_STATE, action) => {
         summary,
         icon
         },
+        hourly: action.payload.data.hourly,
         daily: action.payload.data.daily
       };
     default:

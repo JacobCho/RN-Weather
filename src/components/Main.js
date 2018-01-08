@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import CurrentWeather from './CurrentWeather';
-import ForecastList from './ForecastList';
+import WeeklyForecastList from './WeeklyForecastList';
+import HourlyForecastScrollView from './HourlyForecastScrollView';
 import { fetchWeather } from '../actions/WeatherActions';
 import { fetchLocation } from '../actions/GeolocationActions';
 
@@ -28,10 +29,11 @@ class Main extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
         <CurrentWeather />
-        <ForecastList />
-      </View>
+        <HourlyForecastScrollView />
+        <WeeklyForecastList />
+      </ScrollView>
     );
   }
 }

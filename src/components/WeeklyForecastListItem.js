@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { getIconSource } from '../helpers/iconHelper';
 
-class ListItem extends Component {
+class WeeklyForecastListItem extends Component {
   getDayOfWeek() {
     const { time } = this.props.weather;
     const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -54,4 +54,4 @@ const styles = {
   },
 };
 
-export default ListItem;
+export default WeeklyForecastListItem;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { ListView, View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import ListItem from './ListItem';
+import WeeklyForecastListItem from './WeeklyForecastListItem';
 
-class ForecastList extends Component {
+class WeeklyForecastList extends Component {
   componentWillMount() {
     this.createDataSource(this.props);
   }
@@ -21,7 +21,7 @@ class ForecastList extends Component {
   }
   
   renderRow(weather) {
-    return <ListItem weather={weather} />;
+    return <WeeklyForecastListItem weather={weather} />;
   }
 
   render() {
@@ -67,4 +67,4 @@ const mapStateToProps = (state) => {
   return { forecast, summary };
 };
 
-export default connect(mapStateToProps, null)(ForecastList);
+export default connect(mapStateToProps, null)(WeeklyForecastList);
