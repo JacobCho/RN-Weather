@@ -28,7 +28,7 @@ class CurrentWeather extends Component {
         </View>
         <View style={[containerStyle, degreesContainerStyle]}>
           <Text style={degreesTextStyle}>
-            {temperature} °C
+            {temperature}°C
           </Text>
         </View>
         <View style={[containerStyle, weatherContainerStyle]}>

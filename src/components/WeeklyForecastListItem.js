@@ -22,8 +22,8 @@ class WeeklyForecastListItem extends Component {
         <Text style={dayTextStyle}>{this.getDayOfWeek()}</Text>
         <Image source={iconSource} style={iconStyle}/>
         <View style={temperatureContainerStyle}>
-          <Text>{Math.round(temperatureMin)} °C</Text>
-          <Text>{Math.round(temperatureMax)} °C</Text>
+          <Text>{Math.round(temperatureMin)}°C</Text>
+          <Text>{Math.round(temperatureMax)}°C</Text>
         </View>
       </View>
     );

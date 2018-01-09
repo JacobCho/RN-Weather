@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ListView, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import WeeklyForecastListItem from './WeeklyForecastListItem';
+import Header from './Header';
 
 class WeeklyForecastList extends Component {
   componentWillMount() {
@@ -25,10 +26,10 @@ class WeeklyForecastList extends Component {
   }
 
   render() {
-    const { summaryTextStyle, forecastHeaderStyle, listViewStyle } = styles; 
+    const { summaryTextStyle, listViewStyle } = styles; 
     return (
       <View>
-        <Text style={forecastHeaderStyle}>Weekly Forecast</Text>
+        <Header>Weekly Forecast</Header>
         <Text style={summaryTextStyle}>{this.props.summary}</Text>
         <ListView 
           style={listViewStyle}
@@ -46,14 +47,8 @@ const styles = {
   summaryTextStyle: {
     paddingLeft: 15,
     paddingRight: 15,
-    paddingBottom: 20
-  },
-  forecastHeaderStyle: {
-    paddingLeft: 15,
-    paddingRight: 15, 
-    paddingBottom: 15,
-    paddingTop: 20,
-    fontWeight: 'bold'
+    paddingBottom: 20,
+    paddingTop: 15
   },
   listViewStyle: {
   }

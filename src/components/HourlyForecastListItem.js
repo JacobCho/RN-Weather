@@ -21,7 +21,7 @@ class HourlyForecastListItem extends Component {
       <View style={containerStyle}>
         <Text style={textStyle}>{time}</Text>
         <Image source={iconSource} style={iconStyle} />
-        <Text style={[textStyle, tempTextStyle]}>{roundedTemp} °C</Text>
+        <Text style={[textStyle, tempTextStyle]}>{roundedTemp}°C</Text>
       </View>
     );
   }

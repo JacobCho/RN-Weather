@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import { connect } from 'react-redux';
 import HourlyForecastListItem from './HourlyForecastListItem';
+import Header from './Header';
 
 class HourlyForecastScrollView extends Component {
   renderHourlyForecast() {
@@ -11,11 +12,13 @@ class HourlyForecastScrollView extends Component {
   }
 
   render() {
+    const { containerStyle, scrollViewStyle } = styles;
     return (
-      <View>
-        <Text style={styles.headerStyle}>Hourly Forecast</Text>
+      <View style={containerStyle}>
+        <Header>Hourly Forecast</Header>
         <ScrollView
           horizontal
+          style={scrollViewStyle}
         >
          {this.renderHourlyForecast()}
         </ScrollView>
@@ -25,13 +28,13 @@ class HourlyForecastScrollView extends Component {
 };
 
 const styles = {
-  headerStyle: {
-    paddingLeft: 15,
-    paddingRight: 15, 
-    paddingBottom: 15,
-    paddingTop: 20,
-    fontWeight: 'bold'
+  containerStyle: {
+    paddingTop: 15, 
+    paddingBottom: 15
   },
+  scrollViewStyle: {
+    paddingTop: 15
+  }
 }
 
 const mapStateToProps = (state) => {
