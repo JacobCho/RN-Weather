@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import CurrentWeather from './CurrentWeather';
 import WeeklyForecastList from './WeeklyForecastList';
 import HourlyForecastScrollView from './HourlyForecastScrollView';
+import CurrentWeatherDetails from './CurrentWeatherDetails';
 import { fetchWeather } from '../actions/WeatherActions';
 import { fetchLocation } from '../actions/GeolocationActions';
 
@@ -31,6 +32,7 @@ class Main extends Component {
     return (
       <ScrollView style={{ flex: 1 }}>
         <CurrentWeather />
+        <CurrentWeatherDetails />
         <HourlyForecastScrollView />
         <WeeklyForecastList />
       </ScrollView>

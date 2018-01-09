@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableWithoutFeedback } from 'react-native';
 
 class Header extends Component {
 
   render() {
     const { containerStyle, headerStyle } = styles;
     return (
-      <View style={containerStyle}>
-        <Text style={headerStyle}>{this.props.children}</Text>
-      </View>
+      <TouchableWithoutFeedback onPress={this.props.onPress}>
+        <View style={containerStyle}>
+          <Text style={headerStyle}>{this.props.children}</Text>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 };
