@@ -1,25 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { getIconSource } from '../helpers/iconHelper';
+import { getDayOfWeek } from '../helpers/timeHelper';
 
 class WeeklyForecastListItem extends Component {
-  getDayOfWeek() {
-    const { time } = this.props.weather;
-    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    const date = new Date(0);
-    date.setUTCSeconds(time);
-
-    return days[date.getDay()];
-  }
-
   render() {
-    const { summary, temperatureMin, temperatureMax, icon } = this.props.weather;
+    const { summary, temperatureMin, temperatureMax, icon, time } = this.props.weather;
     const { containerStyle, dayTextStyle, iconStyle, temperatureContainerStyle } = styles;
     const iconSource = getIconSource(icon);
     
     return (
       <View style={containerStyle}>
-        <Text style={dayTextStyle}>{this.getDayOfWeek()}</Text>
+        <Text style={dayTextStyle}>{getDayOfWeek(time)}</Text>
         <Image source={iconSource} style={iconStyle}/>
         <View style={temperatureContainerStyle}>
           <Text>{Math.round(temperatureMin)}°C</Text>
