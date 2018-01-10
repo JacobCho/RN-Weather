@@ -20,7 +20,7 @@ export default Header;
 const styles = {
   containerStyle: {
     height: 30,
-    backgroundColor: 'grey',
+    backgroundColor: 'mediumseagreen',
     justifyContent: 'center',
     flexDirection: 'column'
   },

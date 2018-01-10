@@ -72,7 +72,7 @@ const styles = {
   degreesTextStyle: {
     fontSize: 40,
     flex: 1,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   weatherContainerStyle: {
     paddingTop: 20
@@ -80,7 +80,8 @@ const styles = {
   weatherTextStyle: {
     fontSize: 18,
     textAlign: 'center',
-    paddingLeft: 10
+    paddingLeft: 10,
+    paddingTop: 5,
   },
   iconStyle: {
     width: 30,

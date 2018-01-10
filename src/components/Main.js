@@ -50,7 +50,7 @@ class Main extends Component {
   render() {
     return (
       <ScrollView 
-        style={{ flex: 1 }}
+        style={{ flex: 1, backgroundColor: 'white' }}
         refreshControl={this.renderRefreshControl()}
         >
         <CurrentWeather />

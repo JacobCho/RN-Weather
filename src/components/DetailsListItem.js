@@ -45,7 +45,7 @@ const styles = {
     paddingTop: 5,
     paddingBottom: 10,
     paddingLeft: 15,
-    fontSize: 15,
+    fontSize: 15
   }
 }
 
