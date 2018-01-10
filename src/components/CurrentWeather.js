@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { getIconSource } from '../helpers/iconHelper';
+import { getHoursFromUnix } from '../helpers/timeHelper';
 
 class CurrentWeather extends Component {
   render() {
@@ -9,6 +10,7 @@ class CurrentWeather extends Component {
       containerStyle, 
       locationContainerStyle,
       locationTextStyle, 
+      lastUpdatedTextStyle,
       degreesContainerStyle,
       degreesTextStyle, 
       weatherContainerStyle,
@@ -16,7 +18,7 @@ class CurrentWeather extends Component {
       iconStyle
     } = styles;
 
-    const { address, temperature, summary, icon } = this.props;
+    const { address, temperature, summary, icon, time } = this.props;
     const iconSource = getIconSource(icon);
     
     return (
@@ -24,6 +26,9 @@ class CurrentWeather extends Component {
         <View style={[containerStyle, locationContainerStyle]}>
           <Text style={locationTextStyle}>
             {address}
+          </Text>
+          <Text style={lastUpdatedTextStyle}>
+            {`Last Updated: ${getHoursFromUnix(time, true)}`}
           </Text>
         </View>
         <View style={[containerStyle, degreesContainerStyle]}>
@@ -48,12 +53,18 @@ const styles = {
     flexDirection: 'row',
   },
   locationContainerStyle: {
-    paddingTop: 30
+    paddingTop: 40,
+    flexDirection: 'column'
   },
   locationTextStyle: {
     fontSize: 18,
     flex: 1,
     textAlign: 'center'
+  },
+  lastUpdatedTextStyle: {
+    fontSize: 8,
+    textAlign: 'center',
+    flex: 1,
   },
   degreesContainerStyle: {
     paddingTop: 50
@@ -79,10 +90,10 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { temperature, summary, icon } = state.weather.currently;
+  const { temperature, summary, icon, time } = state.weather.currently;
   const { address } = state.geolocation;
   
-  return { temperature, summary, icon, address };
+  return { temperature, summary, icon, time, address };
 };
 
 export default connect(mapStateToProps, null)(CurrentWeather);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import CurrentWeather from './CurrentWeather';
 import WeeklyForecastList from './WeeklyForecastList';
@@ -10,12 +10,16 @@ import { fetchLocation } from '../actions/GeolocationActions';
 
 class Main extends Component {
   state = {
-    error: ''
+    error: '',
+    latitude: 0,
+    longitude: 0,
+    refreshing: false
   }
 
   componentWillMount() {
     this.watchId = navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
+      this.setState({ latitude, longitude });
       this.props.fetchWeather({ latitude, longitude });
       this.props.fetchLocation({ latitude, longitude });
     },
@@ -28,9 +32,27 @@ class Main extends Component {
     navigator.geolocation.clearWatch(this.watchId);
   }
 
+  componentWillReceiveProps(newProps) {
+    this.setState({ refreshing: newProps.isRefreshing });
+  }
+
+  refresh() {
+    const { latitude, longitude } = this.state;
+    this.props.fetchWeather({ latitude, longitude });
+  }
+
+  renderRefreshControl() {
+    return <RefreshControl 
+              refreshing={this.state.refreshing}
+              onRefresh={this.refresh.bind(this)}/>;
+  }
+
   render() {
     return (
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView 
+        style={{ flex: 1 }}
+        refreshControl={this.renderRefreshControl()}
+        >
         <CurrentWeather />
         <CurrentWeatherDetails />
         <HourlyForecastScrollView />
@@ -40,4 +62,10 @@ class Main extends Component {
   }
 }
 
-export default connect(null, { fetchWeather, fetchLocation })(Main);
+const mapStateToProps = (state) => {
+  const { isRefreshing } = state.refreshing;
+
+  return { isRefreshing };
+};
+
+export default connect(mapStateToProps, { fetchWeather, fetchLocation })(Main);

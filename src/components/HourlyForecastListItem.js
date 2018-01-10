@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { getIconSource } from '../helpers/iconHelper';
-import { getHoursFromUTC } from '../helpers/timeHelper';
+import { getHoursFromUnix } from '../helpers/timeHelper';
 
 class HourlyForecastListItem extends Component {
   render() {
@@ -9,7 +9,7 @@ class HourlyForecastListItem extends Component {
     const { icon, temperature, time } = this.props.hourly;
     const iconSource = getIconSource(icon);
     const roundedTemp = Math.round(temperature);
-    const timeString = getHoursFromUTC(time);
+    const timeString = getHoursFromUnix(time);
 
     return (
       <View style={containerStyle}>

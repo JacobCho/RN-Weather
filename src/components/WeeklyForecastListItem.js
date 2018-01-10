@@ -36,6 +36,7 @@ const styles = {
   dayTextStyle: {
     paddingLeft: 15,
     width: 100,
+    fontWeight: '700'
   },
   temperatureContainerStyle: {
     flexDirection: 'row',

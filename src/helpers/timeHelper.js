@@ -1,6 +1,6 @@
-export const getHoursFromUTC = (UTC, includeMins = false) => {
+export const getHoursFromUnix = (Unix, includeMins = false) => {
   const date = new Date(0);
-  date.setUTCSeconds(UTC);
+  date.setUTCSeconds(Unix);
 
   var options = {
     hour: 'numeric',
@@ -18,10 +18,10 @@ export const getHoursFromUTC = (UTC, includeMins = false) => {
   return date.toLocaleString('en-US', options);
 }
 
-export const getDayOfWeek = (UTC) => {
+export const getDayOfWeek = (Unix) => {
   const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   const date = new Date(0);
-  date.setUTCSeconds(UTC);
+  date.setUTCSeconds(Unix);
 
   return days[date.getDay()];
 }

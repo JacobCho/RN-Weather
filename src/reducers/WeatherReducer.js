@@ -1,13 +1,14 @@
 import {
   FETCH_WEATHER_SUCCESS
 } from '../actions/types';
-import { getHoursFromUTC } from '../helpers/timeHelper';
+import { getHoursFromUnix } from '../helpers/timeHelper';
 
 const INITIAL_STATE = {
   currently: {
     temperature: 0,
     summary: '',
-    icon: ''
+    icon: '',
+    time: 0
   },
   hourly: {
     data: []
@@ -62,8 +63,8 @@ function getWindDetails(windSpeed, windGust, windBearing) {
 }
 
 function getSunDetails(sunriseTime, sunsetTime) {
-  const sunrise = getHoursFromUTC(sunriseTime, true);
-  const sunset = getHoursFromUTC(sunsetTime, true);
+  const sunrise = getHoursFromUnix(sunriseTime, true);
+  const sunset = getHoursFromUnix(sunsetTime, true);
   return {
     key: 'sun',
     data: [
@@ -104,6 +105,7 @@ export default (state = INITIAL_STATE, action) => {
       const { temperature, 
               summary, 
               icon, 
+              time,
               windSpeed, 
               windGust, 
               windBearing, 
@@ -117,11 +119,12 @@ export default (state = INITIAL_STATE, action) => {
       detailsData.push(getWindDetails(windSpeed, windGust, windBearing));
       detailsData.push(getSunDetails(sunriseTime, sunsetTime));
       detailsData.push(getOtherDetails(visibility, precipProbability));
-  
+      
       return { currently: {
         temperature: roundedTemp,
         summary,
-        icon
+        icon,
+        time
         },
         hourly: hourly,
         daily: daily,
