@@ -35,7 +35,8 @@ const INITIAL_STATE = {
         ]
       }
     */
-  }
+  },
+  alerts: []
 };
 
 function bearingToDirection(bearing) {
@@ -98,10 +99,22 @@ function getOtherDetails(visibility, precipProbability) {
   };
 }
 
+function addFakeAlert() {
+  return {
+    description: "This alert is fake",
+    expires: 1028301820,
+    regions: ["Richmond", "Burnaby"],
+    severity: "warning",
+    time: 1028323048,
+    title: "Fake alert",
+    uri: "google.com"
+  }
+}
+
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_WEATHER_SUCCESS: 
-      const { currently, daily, hourly } = action.payload.data;
+      const { currently, daily, hourly, alerts } = action.payload.data;
       const { temperature, 
               summary, 
               icon, 
@@ -119,18 +132,22 @@ export default (state = INITIAL_STATE, action) => {
       detailsData.push(getWindDetails(windSpeed, windGust, windBearing));
       detailsData.push(getSunDetails(sunriseTime, sunsetTime));
       detailsData.push(getOtherDetails(visibility, precipProbability));
+      const alertsArray = alerts || [];
+      alertsArray.push(addFakeAlert());
       
-      return { currently: {
-        temperature: roundedTemp,
-        summary,
-        icon,
-        time
+      return { 
+        currently: {
+          temperature: roundedTemp,
+          summary,
+          icon,
+          time
         },
         hourly: hourly,
         daily: daily,
         details: {
           data: detailsData
-        }
+        },
+        alerts: alertsArray
       };
     default:
       return state;

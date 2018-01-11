@@ -1,10 +1,31 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { getIconSource } from '../helpers/iconHelper';
 import { getHoursFromUnix } from '../helpers/timeHelper';
+import AlertModal from './AlertModal';
 
 class CurrentWeather extends Component {
+  state = { showModal: false };
+
+  renderAlertButton() {
+    if (this.props.alerts.length > 0) {
+      return (
+        <TouchableOpacity onPress={this.alertButtonPressed.bind(this)}>
+          <Image source={getIconSource('warning')} style={styles.alertStyle}/>
+        </TouchableOpacity>
+      );
+    }
+  }
+
+  alertButtonPressed() {
+    this.setState({ showModal: true });
+  }
+
+  modalClosePressed() {
+    this.setState({ showModal: false });
+  }
+
   render() {
     const { 
       containerStyle, 
@@ -18,12 +39,13 @@ class CurrentWeather extends Component {
       iconStyle
     } = styles;
 
-    const { address, temperature, summary, icon, time } = this.props;
+    const { address, temperature, summary, icon, time, alerts } = this.props;
     const iconSource = getIconSource(icon);
     
     return (
       <View>
-        <View style={[containerStyle, locationContainerStyle]}>
+        {this.renderAlertButton()}
+        <View style={[containerStyle, locationContainerStyle]} pointerEvents="none">
           <Text style={locationTextStyle}>
             {address}
           </Text>
@@ -42,29 +64,36 @@ class CurrentWeather extends Component {
             {summary}
           </Text>
         </View>
+        <AlertModal alerts={alerts} visible={this.state.showModal} onClosePress={this.modalClosePressed.bind(this)}/>
       </View>
     );
   }
 }
 
 const styles = {
+  alertStyle: {
+    position: 'absolute',
+    start: 15,
+    top: 40,
+    height: 30,
+    width: 30,
+  },
   containerStyle: {
     justifyContent: 'center',
     flexDirection: 'row',
   },
   locationContainerStyle: {
     paddingTop: 40,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: 'transparent',
   },
   locationTextStyle: {
     fontSize: 18,
-    flex: 1,
     textAlign: 'center'
   },
   lastUpdatedTextStyle: {
     fontSize: 8,
     textAlign: 'center',
-    flex: 1,
   },
   degreesContainerStyle: {
     paddingTop: 50
@@ -93,8 +122,9 @@ const styles = {
 const mapStateToProps = (state) => {
   const { temperature, summary, icon, time } = state.weather.currently;
   const { address } = state.geolocation;
-  
-  return { temperature, summary, icon, time, address };
+  const { alerts } = state.weather;
+
+  return { temperature, summary, icon, time, alerts, address };
 };
 
 export default connect(mapStateToProps, null)(CurrentWeather);

@@ -20,6 +20,10 @@ export const getIconSource = (icon) => {
       return require('../../icons/partly-cloudy-day.png');
     case 'partly-cloudy-night':
       return require('../../icons/partly-cloudy-night.png');
+    case 'warning':
+      return require('../../icons/warning.png');
+    case 'close':
+      return require('../../icons/close.png');
     default:
       return require('../../icons/rain.png');
   }
