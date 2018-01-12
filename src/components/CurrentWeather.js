@@ -123,7 +123,7 @@ const mapStateToProps = (state) => {
   const { temperature, summary, icon, time } = state.weather.currently;
   const { address } = state.geolocation;
   const { alerts } = state.weather;
-
+  
   return { temperature, summary, icon, time, alerts, address };
 };
 

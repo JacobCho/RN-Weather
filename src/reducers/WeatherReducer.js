@@ -101,13 +101,13 @@ function getOtherDetails(visibility, precipProbability) {
 
 function addFakeAlert() {
   return {
-    description: "This alert is fake",
-    expires: 1028301820,
+    description: "...FLOOD WATCH REMAINS IN EFFECT THROUGH LATE MONDAY NIGHT...\nTHE FLOOD WATCH CONTINUES FOR\n* A PORTION OF NORTHWEST WASHINGTON...INCLUDING THE FOLLOWING\nCOUNTY...MASON.\n* THROUGH LATE FRIDAY NIGHT\n* A STRONG WARM FRONT WILL BRING HEAVY RAIN TO THE OLYMPICS\nTONIGHT THROUGH THURSDAY NIGHT. THE HEAVY RAIN WILL PUSH THE\nSKOKOMISH RIVER ABOVE FLOOD STAGE TODAY...AND MAJOR FLOODING IS\nPOSSIBLE.\n* A FLOOD WARNING IS IN EFFECT FOR THE SKOKOMISH RIVER. THE FLOOD\nWATCH REMAINS IN EFFECT FOR MASON COUNTY FOR THE POSSIBILITY OF\nAREAL FLOODING ASSOCIATED WITH A MAJOR FLOOD.\n",
+    expires: 1542326400,
     regions: ["Richmond", "Burnaby"],
     severity: "warning",
-    time: 1028323048,
+    time: 1515784982,
     title: "Fake alert",
-    uri: "google.com"
+    uri: "https://www.google.com"
   }
 }
 
@@ -133,7 +133,6 @@ export default (state = INITIAL_STATE, action) => {
       detailsData.push(getSunDetails(sunriseTime, sunsetTime));
       detailsData.push(getOtherDetails(visibility, precipProbability));
       const alertsArray = alerts || [];
-      alertsArray.push(addFakeAlert());
       
       return { 
         currently: {
